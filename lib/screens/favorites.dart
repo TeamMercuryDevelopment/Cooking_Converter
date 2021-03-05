@@ -12,12 +12,6 @@ class _FavoritesState extends State<Favorites> {
     "Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 6", "Item 7",  
   ];
 
-  String getItens(List<String> list) {
-    list.forEach((element) {
-      return element.toString();
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
