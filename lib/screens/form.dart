@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:flutter/material.dart';
 
 class ProductForm extends StatefulWidget {
@@ -23,37 +21,6 @@ class _ProductFormState extends State<ProductForm> {
               onPressed: () {},
             )
           ],
-        ),
-        drawer: Drawer(
-          child: ListView(
-            padding: EdgeInsets.zero,
-            children: const <Widget>[
-              DrawerHeader(
-                decoration: BoxDecoration(
-                  color: Colors.blue,
-                ),
-                child: Text(
-                  'Cooking Converter',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 24,
-                  ),
-                ),
-              ),
-              ListTile(
-                leading: Icon(Icons.calculate),
-                title: Text('Conversor'),
-              ),
-              ListTile(
-                leading: Icon(Icons.favorite_outline_outlined),
-                title: Text('Favoritos'),
-              ),
-              ListTile(
-                leading: Icon(Icons.rate_review_rounded),
-                title: Text('Avalie-nos'),
-              ),
-            ],
-          ),
         ),
         body: SingleChildScrollView(
             child: Padding(
@@ -98,7 +65,26 @@ class _ProductFormState extends State<ProductForm> {
                 ],
                 ),
             ),
-        )
+        ),
+        bottomNavigationBar: BottomNavigationBar(
+          items: [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.calculate),
+              // ignore: deprecated_member_use
+              title: Text("Conversor"),
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.favorite_border),
+              // ignore: deprecated_member_use
+              title: Text("Favoritos"),
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.rate_review_rounded),
+              // ignore: deprecated_member_use
+              title: Text("Avalie-nos"),
+            ),
+          ],
+        ),
     );
   }
 }
