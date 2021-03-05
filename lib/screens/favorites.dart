@@ -8,6 +8,15 @@ class Favorites extends StatefulWidget {
 
 class _FavoritesState extends State<Favorites> {
 
+  List listItem = [
+    "Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 6", "Item 7",  
+  ];
+
+  String getItens(List<String> list) {
+    list.forEach((element) {
+      return element.toString();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -17,25 +26,23 @@ class _FavoritesState extends State<Favorites> {
         centerTitle: true,
         title: Text('Favoritos')
       ),
-      body: ListView(
-        children: <Widget> [
-          ListTile(
+      body: ListView.builder(
+        itemCount: listItem.length,
+        itemBuilder: (context, index) {
+          return Padding(
+            padding: const EdgeInsets.all(4.0),
+            child: Card(
+              borderOnForeground: true,
+              child: ListTile(
+                onTap: () {
+                  print(listItem[index]);
+                },
                 leading: Icon(Icons.article_rounded),
-                title: Text('Arroz'),
-          ),
-          ListTile(
-                leading: Icon(Icons.article_rounded),
-                title: Text('Batata'),
-          ),
-          ListTile(
-                leading: Icon(Icons.article_rounded),
-                title: Text('Feijão'),
-          ),
-          ListTile(
-                leading: Icon(Icons.article_rounded),
-                title: Text('Açucar'),
-          ),
-        ],
+                title: Text(listItem[index]),
+              ),
+            ),
+          );
+        },
       ),
       bottomNavigationBar: BottomNavigationBar(
           items: [
