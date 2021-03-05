@@ -7,6 +7,11 @@ class ProductForm extends StatefulWidget {
 
 class _ProductFormState extends State<ProductForm> {
 
+  String value;
+  List listItem = [
+    "Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 6", "Item 4", "Item 4", "Item 4", "Item 4", "Item 4", "Item 4", "Item 4", "Item 4", "Item 4", "Item 4", "Item 4",
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,47 +28,75 @@ class _ProductFormState extends State<ProductForm> {
           ],
         ),
         body: SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.all(24.0),
-              child: Column(
-                children: <Widget> [
-                  SizedBox(
-                    child: TextField(
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                        labelText: "Produto"
+            child: Center(
+              child: Padding(
+                padding: const EdgeInsets.all(24.0),
+                child: Column(
+                  children: <Widget> [
+                    SizedBox(
+                      child: Container(
+                        padding: EdgeInsets.only(left: 8.0, right: 8.0),
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: Colors.black
+                            ),
+                        ),
+                        child: DropdownButton(
+                          hint: Text("Produto"),
+                          icon: Icon(Icons.arrow_drop_down),
+                          iconSize: 40,
+                          elevation: 5,
+                          isExpanded: true,
+                          underline: SizedBox(),
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 16,
+                          ),
+                          value: value,
+                          onChanged: (newValue) {
+                            setState (() {
+                              value = newValue;
+                            });
+                          },
+                          items: listItem.map<DropdownMenuItem<String>>((valueItem) =>
+                          new  DropdownMenuItem<String>(
+                            value: valueItem,
+                            child: Text(valueItem)
+                            )
+                          ).toList(),
+                        ),
                       ),
                     ),
-                  ),
-                  SizedBox(height: 20),
-                  SizedBox(
-                    child: TextField(
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                        labelText: "Converter de"
+                    SizedBox(height: 20),
+                    SizedBox(
+                      child: TextField(
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          labelText: "Converter de"
+                        ),
                       ),
                     ),
-                  ),
-                  SizedBox(height: 20),
-                  SizedBox(
-                    child: TextField(
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                        labelText: "Quantidade"
+                    SizedBox(height: 20),
+                    SizedBox(
+                      child: TextField(
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          labelText: "Quantidade"
+                        ),
                       ),
                     ),
-                  ),
-                  SizedBox(height: 20),
-                  SizedBox(
-                    child: TextField(
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                        labelText: "Converter para"
+                    SizedBox(height: 20),
+                    SizedBox(
+                      child: TextField(
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          labelText: "Converter para"
+                        ),
                       ),
                     ),
+                  ],
                   ),
-                ],
-                ),
+              ),
             ),
         ),
         bottomNavigationBar: BottomNavigationBar(
