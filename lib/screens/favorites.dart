@@ -1,4 +1,4 @@
-import 'package:cooking_converter/models/product.dart';
+
 import 'package:flutter/material.dart';
 
 class Favorites extends StatefulWidget {
@@ -13,32 +13,61 @@ class _FavoritesState extends State<Favorites> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.blue[900],
+        centerTitle: true,
         title: Text('Favoritos')
       ),
-      body: ListView.builder(
-        itemCount: Product.getProducts().length,
-        itemBuilder: (context, index){
-          final Product product = Product.getProducts().elementAt(index);
-          return ProductItem(product);
-        },
+      drawer: Drawer(
+          child: ListView(
+            padding: EdgeInsets.zero,
+            children: const <Widget>[
+              DrawerHeader(
+                decoration: BoxDecoration(
+                  color: Colors.blue,
+                ),
+                child: Text(
+                  'Cooking Converter',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 24,
+                  ),
+                ),
+              ),
+              ListTile(
+                leading: Icon(Icons.calculate),
+                title: Text('Conversor'),
+              ),
+              ListTile(
+                leading: Icon(Icons.favorite_outline_outlined),
+                title: Text('Favoritos'),
+              ),
+              ListTile(
+                leading: Icon(Icons.rate_review_rounded),
+                title: Text('Avalie-nos'),
+              ),
+            ],
+          ),
+        ),
+      body: ListView(
+        children: <Widget> [
+          ListTile(
+                leading: Icon(Icons.article_rounded),
+                title: Text('Arroz'),
+          ),
+          ListTile(
+                leading: Icon(Icons.article_rounded),
+                title: Text('Batata'),
+          ),
+          ListTile(
+                leading: Icon(Icons.article_rounded),
+                title: Text('Feijão'),
+          ),
+          ListTile(
+                leading: Icon(Icons.article_rounded),
+                title: Text('Açucar'),
+          ),
+        ],
       ),
     );
-  }
-}
-
-class ProductItem extends StatelessWidget {
-  final Product _product;
-
-  ProductItem(this._product);
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-        child: ListTile(
-          leading: Icon(Icons.monetization_on),
-          title: Text(_product.name.toString()),
-          
-        ))
-        ;
   }
 }

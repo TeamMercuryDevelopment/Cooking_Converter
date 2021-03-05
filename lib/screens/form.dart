@@ -1,17 +1,6 @@
-import 'package:cooking_converter/components/list_product.dart';
-import 'package:cooking_converter/models/product.dart';
-import 'package:cooking_converter/models/product_controller.dart';
+import 'dart:html';
+
 import 'package:flutter/material.dart';
-import 'package:cooking_converter/components/editor.dart';
-//import 'package:cooking_converter/models/product.dart';
-
-const _appBarTitle = "Cooking Converter";
-
-// const _labelProduct = "Produto";
-const _labelConvertFrom = "Converter de";
-const _labelValue = "Quantidade";
-const _labelConvertTo = "Converter para";
-
 
 class ProductForm extends StatefulWidget {
   @override
@@ -20,95 +9,95 @@ class ProductForm extends StatefulWidget {
 
 class _ProductFormState extends State<ProductForm> {
 
-  // TextEditingController _productController = TextEditingController();
-  TextEditingController _convertFromController = TextEditingController();
-  TextEditingController _valueController = TextEditingController();
-  TextEditingController _convertToController = TextEditingController();
-
-  GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-
-  void _resetFields() {
-    // _productController.text = "";
-    _convertFromController.text = "";
-    _valueController.text = "";
-    _convertToController.text = "";
-
-    setState(() {
-      _formKey = GlobalKey<FormState>();
-    });
-  }
-
-  //void _clearAll() {
-  //  _productController.text = "";
-  //  _convertFromController.text = "";
-  //  _valueController.text = "";
-  //  _convertToController.text = "";
-  //}
-
-  final productController = ProductController();
-  Product _selectedProduct;
-  
-  @override
-  void initState() {
-    productController.dropdownMenuItems = productController.buildDropdownMenuItems(productController.products);
-    productController.selectedProduct = productController.dropdownMenuItems[0].value;
-    super.initState();
-  }
-
-  onChangeDropdownItem(Product selectedProduct) {
-    setState(() {
-      _selectedProduct = selectedProduct;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.blue[100],
         appBar: AppBar(
-          title: Text(_appBarTitle),
+          title: Text("Cooking Converter"),
           backgroundColor: Colors.blue[900],
           centerTitle: true,
           actions: <Widget>[
             IconButton(
               icon: Icon(Icons.refresh),
-              onPressed: _resetFields,
+              onPressed: () {},
             )
           ],
         ),
+        drawer: Drawer(
+          child: ListView(
+            padding: EdgeInsets.zero,
+            children: const <Widget>[
+              DrawerHeader(
+                decoration: BoxDecoration(
+                  color: Colors.blue,
+                ),
+                child: Text(
+                  'Cooking Converter',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 24,
+                  ),
+                ),
+              ),
+              ListTile(
+                leading: Icon(Icons.calculate),
+                title: Text('Conversor'),
+              ),
+              ListTile(
+                leading: Icon(Icons.favorite_outline_outlined),
+                title: Text('Favoritos'),
+              ),
+              ListTile(
+                leading: Icon(Icons.rate_review_rounded),
+                title: Text('Avalie-nos'),
+              ),
+            ],
+          ),
+        ),
         body: SingleChildScrollView(
-            child: Form(
-                key: _formKey,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: <Widget>[
-                    ListProduct(
-                      controller: productController.productController,
-                      selectedProduct: _selectedProduct,
-                      dropdownMenuItems: productController.dropdownMenuItems,
-                      onChange: onChangeDropdownItem,
+            child: Padding(
+              padding: const EdgeInsets.all(24.0),
+              child: Column(
+                children: <Widget> [
+                  SizedBox(
+                    child: TextField(
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: "Produto"
+                      ),
                     ),
-                    Editor(
-                      controller: _convertFromController,
-                      label: _labelConvertFrom,
+                  ),
+                  SizedBox(height: 20),
+                  SizedBox(
+                    child: TextField(
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: "Converter de"
+                      ),
                     ),
-                    Editor(
-                      controller: _valueController,
-                      label: _labelValue,
+                  ),
+                  SizedBox(height: 20),
+                  SizedBox(
+                    child: TextField(
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: "Quantidade"
+                      ),
                     ),
-                    Editor(
-                      controller: _convertToController,
-                      label: _labelConvertTo,
+                  ),
+                  SizedBox(height: 20),
+                  SizedBox(
+                    child: TextField(
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: "Converter para"
+                      ),
                     ),
-                    IconButton(
-                      icon: Icon(Icons.favorite),
-                      onPressed: () {
-                        
-                      },
-                    )
-                  ],
-                )
-            )
+                  ),
+                ],
+                ),
+            ),
         )
     );
   }
