@@ -27,15 +27,14 @@ dependencies:
   mobx:
   flutter_mobx:
   get_it:
-  build_runner: ^1.10.1
-  footer:
 
 dev_dependencies:
-mobx_codegen:
-flutter_test:
-  sdk: flutter
-integration_test:
-  sdk: flutter
+  mobx_codegen:
+  build_runner: ^1.10.1
+  flutter_test:
+    sdk: flutter
+  integration_test:
+    sdk: flutter
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

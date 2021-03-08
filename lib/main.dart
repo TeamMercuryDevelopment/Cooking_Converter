@@ -1,5 +1,5 @@
-import 'package:cooking_converter/screens/favorites.dart';
-// import 'package:cooking_converter/screens/form.dart';
+// import 'package:cooking_converter/screens/favorites.dart';
+import 'package:cooking_converter/screens/form.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(CookingConverterApp());
@@ -17,8 +17,8 @@ class CookingConverterApp extends StatelessWidget {
           textTheme: ButtonTextTheme.primary,
         ),
       ),
-      // home: ProductForm(),
-      home: Favorites(),
+      home: ProductForm(),
+      // home: Favorites(),
     );
   }
 }
