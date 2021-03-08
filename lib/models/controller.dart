@@ -6,14 +6,12 @@ class Controller = _ControllerBase with _$Controller;
 abstract class _ControllerBase with Store {
   
   @observable
-  String name;
+  String name = '';
 
   @action
   setName (String newName) => name = newName;
 
-  @action
-  String getName () {
-    return name;
-  } 
+  @computed
+  String get transaction => name;
     
 }

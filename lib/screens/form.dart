@@ -1,3 +1,4 @@
+import 'package:cooking_converter/components/selectbox.dart';
 import 'package:cooking_converter/models/controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -9,8 +10,8 @@ class ProductForm extends StatefulWidget {
 
 class _ProductFormState extends State<ProductForm> {
 
-  String value;
-  final controller = Controller();
+  String productValue;
+  final productController = Controller();
   List listItem = [
     "Item 1", "Item 2", "Item 3", "Item 4",
   ];
@@ -37,39 +38,12 @@ class _ProductFormState extends State<ProductForm> {
                 child: Column(
                   children: <Widget> [
                     SizedBox(
-                      child: Container(
-                        padding: EdgeInsets.only(left: 8.0, right: 8.0),
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: Colors.black
-                            ),
-                        ),
-                        child: DropdownButton(
-                          hint: Text("Produto"),
-                          icon: Icon(Icons.arrow_drop_down),
-                          iconSize: 40,
-                          elevation: 5,
-                          isExpanded: true,
-                          underline: SizedBox(),
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 16,
-                          ),
-                          value: value,
-                          onChanged: (newValue) {
-                            setState (() {
-                              value = newValue;
-                            });
-                            controller.setName(value);
-                          },
-                          items: listItem.map<DropdownMenuItem<String>>((valueItem) =>
-                          new  DropdownMenuItem<String>(
-                            value: valueItem,
-                            child: Text(valueItem)
-                            )
-                          ).toList(),
-                        ),
-                      ),
+                      child: SelectBox(
+                        controller: productController,
+                        label: 'Produto',
+                        value: productValue,
+                        list: listItem,
+                      )
                     ),
                     SizedBox(height: 20),
                     SizedBox(
@@ -101,7 +75,7 @@ class _ProductFormState extends State<ProductForm> {
                     SizedBox(height: 20),
                     Observer(
                       builder: (_) {
-                        return Text('${controller.getName()}');
+                        return Text('${productController.transaction}');
                       } 
                     ),
                   ],
@@ -131,5 +105,3 @@ class _ProductFormState extends State<ProductForm> {
     );
   }
 }
-
-
