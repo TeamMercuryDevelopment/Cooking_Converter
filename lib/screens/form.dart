@@ -1,4 +1,4 @@
-import 'package:cooking_converter/models/controller.dart';
+import 'package:cooking_converter/controller/controller.dart';
 import 'package:cooking_converter/product.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
