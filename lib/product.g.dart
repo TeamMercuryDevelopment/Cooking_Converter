@@ -39,8 +39,6 @@ mixin _$Product on _ProductBase, Store {
 
   @override
   String toString() {
-    return '''
-${name}
-    ''';
+    return ''' ${name} ''';
   }
 }

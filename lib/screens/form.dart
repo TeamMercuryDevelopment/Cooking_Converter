@@ -41,7 +41,7 @@ class _ProductFormState extends State<ProductForm> {
                         border: Border.all(color: Colors.black),
                       ),
                       child: _selectBox(
-                        label: 'Product',
+                        label: productController.selectedItem,
                         item: productValue,
                         controller: productController,
                         list: productController.listProduct,
