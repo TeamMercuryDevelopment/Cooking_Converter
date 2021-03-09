@@ -1,5 +1,4 @@
 import 'package:cooking_converter/controller/controller.dart';
-import 'package:cooking_converter/product.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
@@ -10,7 +9,11 @@ class ProductForm extends StatefulWidget {
 
 class _ProductFormState extends State<ProductForm> {
   String productValue;
+  String convertFromValue;
+  String convertToValue;
   final productController = Controller();
+  final convertFromController = Controller();
+  final convertToController = Controller();
 
   @override
   Widget build(BuildContext context) {
@@ -48,31 +51,44 @@ class _ProductFormState extends State<ProductForm> {
                       ));
                 }),
                 SizedBox(height: 20),
-                SizedBox(
-                  child: TextField(
-                    decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                        labelText: "Converter de"),
-                  ),
-                ),
+                Observer(builder: (_) {
+                  return Container(
+                      padding: EdgeInsets.only(left: 8.0, right: 8.0),
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.black),
+                      ),
+                      child: _selectBox(
+                        label: convertFromController.selectedItem,
+                        item: convertFromValue,
+                        controller: convertFromController,
+                        list: convertFromController.listConvert,
+                      ));
+                }),
                 SizedBox(height: 20),
                 SizedBox(
                   child: TextField(
                     decoration: InputDecoration(
-                        border: OutlineInputBorder(), labelText: "Quantidade"),
-                  ),
-                ),
-                SizedBox(height: 20),
-                SizedBox(
-                  child: TextField(
-                    decoration: InputDecoration(
                         border: OutlineInputBorder(),
-                        labelText: "Converter para"),
+                        labelText: "Quantidade"),
                   ),
                 ),
                 SizedBox(height: 20),
                 Observer(builder: (_) {
-                  return Text('${productController.transaction}');
+                  return Container(
+                      padding: EdgeInsets.only(left: 8.0, right: 8.0),
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.black),
+                      ),
+                      child: _selectBox(
+                        label: convertToController.selectedItem,
+                        item: convertToValue,
+                        controller: convertToController,
+                        list: convertToController.listConvert,
+                      ));
+                }),
+                SizedBox(height: 20),
+                Observer(builder: (_) {
+                  return Text('${productController.transaction}' + ' ${convertFromController.transaction} para' + ' ${convertToController.transaction}');
                 }),
               ],
             ),
@@ -118,8 +134,8 @@ class _ProductFormState extends State<ProductForm> {
         controller.setSelectedItem(newItem.toString());
       },
       items: list
-          .map<DropdownMenuItem<Product>>((valueItem) =>
-              new DropdownMenuItem<Product>(
+          .map<DropdownMenuItem<Object>>((valueItem) =>
+              new DropdownMenuItem<Object>(
                   value: valueItem, child: Text(valueItem.toString())))
           .toList(),
     );

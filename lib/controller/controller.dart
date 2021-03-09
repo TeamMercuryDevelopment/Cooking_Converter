@@ -1,5 +1,6 @@
 import 'package:mobx/mobx.dart';
 
+import '../convert.dart';
 import '../product.dart';
 part 'controller.g.dart';
 
@@ -12,6 +13,13 @@ abstract class _ControllerBase with Store {
     Product(name: "Item 1",),
     Product(name: "Item 2",),
     Product(name: "Item 3",),
+  ].asObservable();
+
+  @observable
+  ObservableList<Convert> listConvert = [
+    Convert(name: "Gramas",),
+    Convert(name: "Litros",),
+    Convert(name: "Mãe do Bastet",),
   ].asObservable();
 
   @observable

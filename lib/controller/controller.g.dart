@@ -32,6 +32,21 @@ mixin _$Controller on _ControllerBase, Store {
     });
   }
 
+  final _$listConvertAtom = Atom(name: '_ControllerBase.listConvert');
+
+  @override
+  ObservableList<Convert> get listConvert {
+    _$listConvertAtom.reportRead();
+    return super.listConvert;
+  }
+
+  @override
+  set listConvert(ObservableList<Convert> value) {
+    _$listConvertAtom.reportWrite(value, super.listConvert, () {
+      super.listConvert = value;
+    });
+  }
+
   final _$selectedItemAtom = Atom(name: '_ControllerBase.selectedItem');
 
   @override
@@ -65,6 +80,7 @@ mixin _$Controller on _ControllerBase, Store {
   String toString() {
     return '''
 listProduct: ${listProduct},
+listConvert: ${listConvert},
 selectedItem: ${selectedItem},
 transaction: ${transaction}
     ''';
