@@ -17,18 +17,33 @@ mixin _$Controller on _ControllerBase, Store {
               name: '_ControllerBase.transaction'))
           .value;
 
-  final _$nameAtom = Atom(name: '_ControllerBase.name');
+  final _$listProductAtom = Atom(name: '_ControllerBase.listProduct');
 
   @override
-  String get name {
-    _$nameAtom.reportRead();
-    return super.name;
+  ObservableList<Product> get listProduct {
+    _$listProductAtom.reportRead();
+    return super.listProduct;
   }
 
   @override
-  set name(String value) {
-    _$nameAtom.reportWrite(value, super.name, () {
-      super.name = value;
+  set listProduct(ObservableList<Product> value) {
+    _$listProductAtom.reportWrite(value, super.listProduct, () {
+      super.listProduct = value;
+    });
+  }
+
+  final _$selectedItemAtom = Atom(name: '_ControllerBase.selectedItem');
+
+  @override
+  String get selectedItem {
+    _$selectedItemAtom.reportRead();
+    return super.selectedItem;
+  }
+
+  @override
+  set selectedItem(String value) {
+    _$selectedItemAtom.reportWrite(value, super.selectedItem, () {
+      super.selectedItem = value;
     });
   }
 
@@ -36,11 +51,11 @@ mixin _$Controller on _ControllerBase, Store {
       ActionController(name: '_ControllerBase');
 
   @override
-  dynamic setName(String newName) {
+  dynamic setSelectedItem(String newItem) {
     final _$actionInfo = _$_ControllerBaseActionController.startAction(
-        name: '_ControllerBase.setName');
+        name: '_ControllerBase.setSelectedItem');
     try {
-      return super.setName(newName);
+      return super.setSelectedItem(newItem);
     } finally {
       _$_ControllerBaseActionController.endAction(_$actionInfo);
     }
@@ -49,7 +64,8 @@ mixin _$Controller on _ControllerBase, Store {
   @override
   String toString() {
     return '''
-name: ${name},
+listProduct: ${listProduct},
+selectedItem: ${selectedItem},
 transaction: ${transaction}
     ''';
   }

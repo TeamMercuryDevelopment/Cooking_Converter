@@ -1,4 +1,5 @@
 import 'package:cooking_converter/models/controller.dart';
+import 'package:cooking_converter/product.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
@@ -10,13 +11,6 @@ class ProductForm extends StatefulWidget {
 class _ProductFormState extends State<ProductForm> {
   String productValue;
   final productController = Controller();
-  
-  List listProducts = [
-    "Item 1",
-    "Item 2",
-    "Item 3",
-    "Item 4",
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -40,17 +34,19 @@ class _ProductFormState extends State<ProductForm> {
             child: Column(
               children: <Widget>[
                 SizedBox(height: 20),
-                Container(
-                    padding: EdgeInsets.only(left: 8.0, right: 8.0),
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.black),
-                    ),
-                    child: _selectBox(
-                      label: 'Product',
-                      item: productValue,
-                      controller: productController,
-                      list: listProducts,
-                    )),
+                Observer(builder: (_) {
+                  return Container(
+                      padding: EdgeInsets.only(left: 8.0, right: 8.0),
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.black),
+                      ),
+                      child: _selectBox(
+                        label: 'Product',
+                        item: productValue,
+                        controller: productController,
+                        list: productController.listProduct,
+                      ));
+                }),
                 SizedBox(height: 20),
                 SizedBox(
                   child: TextField(
@@ -119,13 +115,12 @@ class _ProductFormState extends State<ProductForm> {
       ),
       value: item,
       onChanged: (newItem) {
-        controller.setSelectedItem(newItem);
-        controller.setName(newItem);
+        controller.setSelectedItem(newItem.toString());
       },
       items: list
-          .map<DropdownMenuItem<String>>((valueItem) =>
-              new DropdownMenuItem<String>(
-                  value: valueItem, child: Text(valueItem)))
+          .map<DropdownMenuItem<Product>>((valueItem) =>
+              new DropdownMenuItem<Product>(
+                  value: valueItem, child: Text(valueItem.toString())))
           .toList(),
     );
   }
