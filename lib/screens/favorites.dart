@@ -1,4 +1,5 @@
 
+import 'package:cooking_converter/screens/form.dart';
 import 'package:flutter/material.dart';
 
 class Favorites extends StatefulWidget {
@@ -8,6 +9,8 @@ class Favorites extends StatefulWidget {
 
 class _FavoritesState extends State<Favorites> {
 
+  int _currentIndex = 1;
+
   List listItem = [
     "Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 6", "Item 7",  
   ];
@@ -15,48 +18,56 @@ class _FavoritesState extends State<Favorites> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.blue[100],
       appBar: AppBar(
         backgroundColor: Colors.blue[900],
         centerTitle: true,
         title: Text('Favoritos')
       ),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _currentIndex,
+        type: BottomNavigationBarType.fixed,
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.calculate),
+            label: "Converter",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.favorite_border),
+            label: "Favorites",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.rate_review_rounded),
+            label: "Rate",
+          ),
+        ],
+        onTap: (index) {
+          setState(() {
+            _currentIndex = index;  
+            if (_currentIndex == 0) {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => ProductForm()));     
+            }
+          });
+        },
+      ),
       body: ListView.builder(
         itemCount: listItem.length,
         itemBuilder: (context, index) {
           return Padding(
-            padding: const EdgeInsets.all(4.0),
+            padding: const EdgeInsets.fromLTRB(24.0, 12.0, 24.0, 0.0),
             child: Card(
               borderOnForeground: true,
               child: ListTile(
                 onTap: () {
                   print(listItem[index]);
                 },
-                leading: Icon(Icons.article_rounded),
+                leading: Icon(Icons.article_rounded, size: 32.0,),
                 title: Text(listItem[index]),
               ),
             ),
           );
         },
       ),
-      bottomNavigationBar: BottomNavigationBar(
-          items: [
-            BottomNavigationBarItem(
-              icon: Icon(Icons.calculate),
-              // ignore: deprecated_member_use
-              title: Text("Conversor"),
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.favorite_border),
-              // ignore: deprecated_member_use
-              title: Text("Favoritos"),
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.rate_review_rounded),
-              // ignore: deprecated_member_use
-              title: Text("Avalie-nos"),
-            ),
-          ],
-        ),
     );
   }
 }
