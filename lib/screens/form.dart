@@ -14,14 +14,16 @@ class _ProductFormState extends State<ProductForm> {
   String productValue;
   String convertFromValue;
   String convertToValue;
+  String quantityValue;
   final productController = Controller();
   final convertFromController = Controller();
   final convertToController = Controller();
+  final quantityController = Controller();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blue[100],
+      backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text("Cooking Converter"),
         backgroundColor: Colors.blue[900],
@@ -73,7 +75,7 @@ class _ProductFormState extends State<ProductForm> {
                       decoration: BoxDecoration(
                         color: Colors.white,
                         border: Border.all(color: Colors.black),
-                        borderRadius: BorderRadius.circular(25.7),
+                        borderRadius: BorderRadius.circular(10.0),
                       ),
                       child: _selectBox(
                         label: productController.selectedItem,
@@ -89,7 +91,7 @@ class _ProductFormState extends State<ProductForm> {
                       decoration: BoxDecoration(
                         color: Colors.white,
                         border: Border.all(color: Colors.black),
-                        borderRadius: BorderRadius.circular(25.7),
+                        borderRadius: BorderRadius.circular(10.0),
                       ),
                       child: _selectBox(
                         label: convertFromController.selectedItem,
@@ -99,34 +101,13 @@ class _ProductFormState extends State<ProductForm> {
                       ));
                 }),
                 SizedBox(height: 20),
-                SizedBox(
-                  child: TextField(
-                      autofocus: false,
-                      decoration: InputDecoration(
-                        filled: true,
-                        fillColor: Colors.white,
-                        border: OutlineInputBorder(),
-                        labelText: "Quantidade",
-                        contentPadding: const EdgeInsets.only(
-                            left: 14.0, bottom: 8.0, top: 8.0),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.white),
-                          borderRadius: BorderRadius.circular(25.7),
-                        ),
-                        enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.white),
-                          borderRadius: BorderRadius.circular(25.7),
-                        ),
-                      )),
-                ),
-                SizedBox(height: 20),
                 Observer(builder: (_) {
                   return Container(
                       padding: EdgeInsets.only(left: 8.0, right: 8.0),
                       decoration: BoxDecoration(
                         color: Colors.white,
                         border: Border.all(color: Colors.black),
-                        borderRadius: BorderRadius.circular(25.7),
+                        borderRadius: BorderRadius.circular(10.0),
                       ),
                       child: _selectBox(
                         label: convertToController.selectedItem,
@@ -136,15 +117,33 @@ class _ProductFormState extends State<ProductForm> {
                       ));
                 }),
                 SizedBox(height: 20),
+                SizedBox(
+                  child: Container(
+                      padding: EdgeInsets.only(left: 8.0, right: 8.0),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        border: Border.all(color: Colors.black),
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      child: _textField(
+                        label: "Quantity",
+                        onChanged: (value) {
+                          quantityController.setSelectedItem(value.toString());
+                        },
+                      ),
+                  )
+                ),
+                SizedBox(height: 60),
                 Observer(builder: (_) {
                   if (productController.selectedItem != "") {
                     return Container(
                         child: Text(
-                      '${productController.transaction}' +
-                          ' ${convertFromController.transaction} para' +
+                          '${quantityController.transaction}' +
+                          ' ${convertFromController.transaction} de' +
+                          ' ${productController.transaction} equivale [result]' +
                           ' ${convertToController.transaction}',
                       style: TextStyle(
-                        fontSize: 24.0,
+                        fontSize: 18.0,
                       ),
                       textAlign: TextAlign.center,
                     ));
@@ -187,6 +186,15 @@ class _ProductFormState extends State<ProductForm> {
               new DropdownMenuItem<Object>(
                   value: valueItem, child: Text(valueItem.toString())))
           .toList(),
+    );
+  }
+
+  _textField({String label, onChanged}) {
+    return TextField(
+      onChanged: onChanged,
+      decoration: InputDecoration(
+        labelText: label,
+      ),
     );
   }
 }
