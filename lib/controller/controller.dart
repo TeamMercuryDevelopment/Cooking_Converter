@@ -23,13 +23,13 @@ abstract class _ControllerBase with Store {
   @observable
   ObservableList<Convert> listConvert = [
     Convert(
-      name: "Conversão 1",
+      name: "Gramas",
     ),
     Convert(
-      name: "Conversão 2",
+      name: "Litros",
     ),
     Convert(
-      name: "Conversão 3",
+      name: "Colher de chá",
     ),
   ].asObservable();
 
