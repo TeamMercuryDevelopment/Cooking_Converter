@@ -39,6 +39,8 @@ mixin _$Convert on _ConvertBase, Store {
 
   @override
   String toString() {
-    return '''${name}''';
+    return '''
+name: ${name}
+    ''';
   }
 }

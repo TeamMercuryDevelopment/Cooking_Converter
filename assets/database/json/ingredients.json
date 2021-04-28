@@ -1,0 +1,267 @@
+[
+  {
+    "id": "2047",
+    "name": "sal",
+    "key": "salt"
+  },
+  {
+    "id": "4053",
+    "name": "azeite",
+    "key": "olive oil"
+  },
+  {
+    "id": "1001",
+    "name": "manteiga",
+    "key": "butter"
+  },
+  {
+    "id": "19335",
+    "name": "açúcar",
+    "key": "sugar"
+  },
+  {
+    "id": "14412",
+    "name": "agua",
+    "key": "water"
+  },
+  {
+    "id": "20081",
+    "name": "farinha de trigo",
+    "key": "flour"
+  },
+  {
+    "id": "2050",
+    "name": "extrato de baunilha",
+    "key": "vanilla extract"
+  },
+  {
+    "id": "1077",
+    "name": "leite",
+    "key": "milk"
+  },
+  {
+    "id": "9152",
+    "name": "suco de limão",
+    "key": "lemon juice"
+  },
+  {
+    "id": "1145",
+    "name": "manteiga sem sal",
+    "key": "unsalted butter"
+  },
+  {
+    "id": "18371",
+    "name": "fermento em pó",
+    "key": "baking powder"
+  },
+  {
+    "id": "1002030",
+    "name": "Pimenta",
+    "key": "pepper"
+  },
+  {
+    "id": "1102047",
+    "name": "sal e pimenta",
+    "key": "salt and pepper"
+  },
+  {
+    "id": "19334",
+    "name": "açúcar mascavo",
+    "key": "brown sugar"
+  },
+  {
+    "id": "18372",
+    "name": "bicarbonato de sódio",
+    "key": "baking soda"
+  },
+  {
+    "id": "4513",
+    "name": "óleo vegetal",
+    "key": "vegetable oil"
+  },
+  {
+    "id": "2010",
+    "name": "canela em pó",
+    "key": "ground cinnamon"
+  },
+  {
+    "id": "1033",
+    "name": "queijo parmesão",
+    "key": "parmesan cheese"
+  },
+  {
+    "id": "2027",
+    "name": "orégano",
+    "key": "oregano"
+  },
+  {
+    "id": "1053",
+    "name": "creme de leite",
+    "key": "heavy cream"
+  },
+  {
+    "id": "1056",
+    "name": "nata",
+    "key": "sour cream"
+  },
+  {
+    "id": "1012047",
+    "name": "sal marinho",
+    "key": "sea salt"
+  },
+  {
+    "id": "9160",
+    "name": "limonada",
+    "key": "lime juice"
+  },
+  {
+    "id": "16124",
+    "name": "molho de soja",
+    "key": "soy sauce"
+  },
+  {
+    "id": "20027",
+    "name": "amido de milho",
+    "key": "cornstarch"
+  },
+  {
+    "id": "4582",
+    "name": "óleo",
+    "key": "oil"
+  },
+  {
+    "id": "2028",
+    "name": "colorau",
+    "key": "paprika"
+  },
+  {
+    "id": "1002046",
+    "name": "mostarda dijon",
+    "key": "dijon mustard"
+  },
+  {
+    "id": "2009",
+    "name": "Pimenta em pó",
+    "key": "chilly powder"
+  },
+  {
+    "id": "19081",
+    "name": "chocolate",
+    "key": "chocolate"
+  },
+  {
+    "id": "4025",
+    "name": "maionese",
+    "key": "mayonnaise"
+  },
+  {
+    "id": "1034053",
+    "name": "azeite de oliva extra virgem",
+    "key": "extra virgin olive oil"
+  },
+  {
+    "id": "4047",
+    "name": "óleo de côco",
+    "key": "coconut oil"
+  },
+  {
+    "id": "9206",
+    "name": "suco de laranja",
+    "key": "orange juice"
+  },
+  {
+    "id": "1230",
+    "name": "Soro de leite coalhado",
+    "key": "buttermilk"
+  },
+  {
+    "id": "1124",
+    "name": "claras de ovo",
+    "key": "egg whites"
+  },
+  {
+    "id": "1125",
+    "name": "gemas de ovo",
+    "key": "egg yolks"
+  },
+  {
+    "id": "1022068",
+    "name": "vinagre de vinho tinto",
+    "key": "red wine vinegar"
+  },
+  {
+    "id": "19336",
+    "name": "açúcar de confeiteiro",
+    "key": "confectioner's sugar"
+  },
+  {
+    "id": "98905",
+    "name": "farinha de centeio",
+    "key": "rye meal"
+  },
+  {
+    "id": "2048",
+    "name": "vinagre de maçã",
+    "key": "apple cider vinegar"
+  },
+  {
+    "id": "20444",
+    "name": "arroz",
+    "key": "rice"
+  },
+  {
+    "id": "93607",
+    "name": "leite de amêndoa",
+    "key": "almond milk"
+  },
+  {
+    "id": "1022053",
+    "name": "vinagre de arroz",
+    "key": "ric vinegar"
+  },
+  {
+    "id": "1001026",
+    "name": "queijo mozzarella ralado",
+    "key": "shredded mozzarella cheese"
+  },
+  {
+    "id": "14106",
+    "name": "vinho branco",
+    "key": "white wine"
+  },
+  {
+    "id": "10219335",
+    "name": "Açucar e canela",
+    "key": "cinnamon sugar"
+  },
+  {
+    "id": "98927",
+    "name": "Farinha de mandioca",
+    "key": "cassava flour"
+  },
+  {
+    "id": "20064",
+    "name": "farinha de centeio integral",
+    "key": "rye flour"
+  },
+  {
+    "id": "11413",
+    "name": "Farinha de Amido de Batata",
+    "key": "Potato Starch flour"
+  },
+  {
+    "id": "16115",
+    "name": "farinha de soja",
+    "key": "soya flour"
+  },
+  {
+    "id": "20019",
+    "name": "farinha de milho",
+    "key": "corn flour"
+  },
+  {
+    "id": "1022047",
+    "name": "flor de sal",
+    "key": "fleur de sel"
+  }
+]

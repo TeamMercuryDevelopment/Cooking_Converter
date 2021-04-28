@@ -5,11 +5,14 @@ class Product = _ProductBase with _$Product;
 
 abstract class _ProductBase with Store {
   
- _ProductBase({this.name});
+ _ProductBase({this.key, this.id, this.name});
 
   @observable
   String name;
 
-  @action
-  setName(newName) => name = newName;
+  @observable
+  String key;
+
+  @observable
+  int id;
 }
