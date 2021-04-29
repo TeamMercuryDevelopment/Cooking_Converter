@@ -19,11 +19,11 @@ abstract class _ConvertToControllerBase with Store {
   }
 
   @observable
-  String selectedItem = '';
+  Measure selectedItem = Measure(name: '');
 
   @action
-  setSelectedItem(String newItem) => selectedItem = newItem;
+  setSelectedItem(Measure newItem) => selectedItem = newItem;
 
   @computed
-  String get transaction => selectedItem;
+  Measure get transaction => selectedItem;
 }

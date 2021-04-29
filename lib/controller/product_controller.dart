@@ -19,11 +19,11 @@ abstract class _ProductControllerBase with Store {
   }
 
   @observable
-  String selectedItem = '';
+  Product selectedItem = Product(name: '');
 
   @action
-  setSelectedItem(String newItem) => selectedItem = newItem;
+  setSelectedItem(Product newItem) => selectedItem = newItem;
 
   @computed
-  String get transaction => selectedItem;
+  Product get transaction => selectedItem;
 }

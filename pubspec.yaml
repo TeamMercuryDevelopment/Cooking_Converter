@@ -30,6 +30,7 @@ dependencies:
   dart_json_mapper: ^1.7.13
   dart_json_mapper_mobx: ^1.2.3
   reflectable: ^2.2.9
+  http: ^0.13.2
 
 dev_dependencies:
   mobx_codegen:

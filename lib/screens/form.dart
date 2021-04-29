@@ -21,7 +21,7 @@ class _ProductFormState extends State<ProductForm> {
   final productController = ProductController();
   final convertToController = ConvertToController();
   final convertFromController = ConvertToController();
-  final quantityController = ConversionController();
+  final conversionController = ConversionController();
 
   @override
   void initState() {
@@ -99,7 +99,7 @@ class _ProductFormState extends State<ProductForm> {
                         borderRadius: BorderRadius.circular(10.0),
                       ),
                       child: _selectBox(
-                        label: productController.selectedItem,
+                        label: productController.selectedItem.name,
                         item: productValue,
                         controller: productController,
                         list: productController.listProduct,
@@ -127,7 +127,7 @@ class _ProductFormState extends State<ProductForm> {
                         borderRadius: BorderRadius.circular(10.0),
                       ),
                       child: _selectBox(
-                        label: convertFromController.selectedItem,
+                        label: convertFromController.selectedItem.name,
                         item: convertFromValue,
                         controller: convertFromController,
                         list: convertFromController.listMeasure,
@@ -153,7 +153,7 @@ class _ProductFormState extends State<ProductForm> {
                         borderRadius: BorderRadius.circular(10.0),
                       ),
                       child: _selectBox(
-                        label: convertToController.selectedItem,
+                        label: convertToController.selectedItem.name,
                         item: convertToValue,
                         controller: convertToController,
                         list: convertToController.listMeasure,
@@ -171,19 +171,28 @@ class _ProductFormState extends State<ProductForm> {
                   child: _textField(
                     label: "Quantity",
                     onChanged: (value) {
-                      quantityController.setSelectedItem(value.toString());
+                      conversionController.setSelectedItem(value.toString());
                     },
                   ),
                 )),
+                SizedBox(height: 20),
+                ElevatedButton(
+                  onPressed: () {
+                    conversionController.convertIngredient(
+                        productController.selectedItem,
+                        conversionController.quantity.toString(),
+                        convertFromController.selectedItem,
+                        convertToController.selectedItem);
+                  },
+                  child: Text("Calcular",
+                      style: TextStyle(color: Colors.white, fontSize: 25)),
+                ),
                 SizedBox(height: 60),
                 Observer(builder: (_) {
-                  if (productController.selectedItem != "") {
+                  if (conversionController.responseText != null) {
                     return Container(
                         child: Text(
-                      '${quantityController.transaction}' +
-                          ' ${convertFromController.transaction} de' +
-                          ' ${productController.transaction} equivale [result]' +
-                          ' ${convertToController.transaction}',
+                      conversionController.responseText,
                       style: TextStyle(
                         fontSize: 18.0,
                       ),
@@ -221,7 +230,7 @@ class _ProductFormState extends State<ProductForm> {
       ),
       value: item,
       onChanged: (newItem) {
-        controller.setSelectedItem(newItem.name);
+        controller.setSelectedItem(newItem);
       },
       items: list
           .map<DropdownMenuItem<Object>>((valueItem) =>
@@ -237,6 +246,7 @@ class _ProductFormState extends State<ProductForm> {
       decoration: InputDecoration(
         labelText: label,
       ),
+      keyboardType: TextInputType.numberWithOptions(decimal: true),
     );
   }
 }
