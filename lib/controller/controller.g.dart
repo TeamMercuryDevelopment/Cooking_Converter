@@ -32,6 +32,23 @@ mixin _$Controller on _ControllerBase, Store {
     });
   }
 
+  final _$asyncJsonProductListAtom =
+      Atom(name: '_ControllerBase.asyncJsonProductList');
+
+  @override
+  ObservableFuture<List<Product>> get asyncJsonProductList {
+    _$asyncJsonProductListAtom.reportRead();
+    return super.asyncJsonProductList;
+  }
+
+  @override
+  set asyncJsonProductList(ObservableFuture<List<Product>> value) {
+    _$asyncJsonProductListAtom.reportWrite(value, super.asyncJsonProductList,
+        () {
+      super.asyncJsonProductList = value;
+    });
+  }
+
   final _$listConvertAtom = Atom(name: '_ControllerBase.listConvert');
 
   @override
@@ -62,6 +79,14 @@ mixin _$Controller on _ControllerBase, Store {
     });
   }
 
+  final _$fetchProductsAsyncAction =
+      AsyncAction('_ControllerBase.fetchProducts');
+
+  @override
+  Future<void> fetchProducts() {
+    return _$fetchProductsAsyncAction.run(() => super.fetchProducts());
+  }
+
   final _$_ControllerBaseActionController =
       ActionController(name: '_ControllerBase');
 
@@ -80,6 +105,7 @@ mixin _$Controller on _ControllerBase, Store {
   String toString() {
     return '''
 listProduct: ${listProduct},
+asyncJsonProductList: ${asyncJsonProductList},
 listConvert: ${listConvert},
 selectedItem: ${selectedItem},
 transaction: ${transaction}

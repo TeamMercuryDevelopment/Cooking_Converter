@@ -1,3 +1,4 @@
+import 'package:cooking_converter/repositories/product_repository.dart';
 import 'package:mobx/mobx.dart';
 
 import '../models/convert.dart';
@@ -8,17 +9,10 @@ class Controller = _ControllerBase with _$Controller;
 
 abstract class _ControllerBase with Store {
   @observable
-  ObservableList<Product> listProduct = [
-    Product(
-      name: "Item 1",
-    ),
-    Product(
-      name: "Item 2",
-    ),
-    Product(
-      name: "Item 3",
-    ),
-  ].asObservable();
+  ObservableList<Product> listProduct;
+
+  @observable
+  ObservableFuture<List<Product>> asyncJsonProductList;
 
   @observable
   ObservableList<Convert> listConvert = [
@@ -38,6 +32,13 @@ abstract class _ControllerBase with Store {
 
   @action
   setSelectedItem(String newItem) => selectedItem = newItem;
+
+  @action
+  Future<void> fetchProducts() async {
+    asyncJsonProductList = ObservableFuture(ProductRepository().getProducts());
+    listProduct = await asyncJsonProductList; 
+  }
+
 
   @computed
   String get transaction => selectedItem;

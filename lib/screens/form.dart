@@ -2,6 +2,7 @@ import 'package:cooking_converter/controller/controller.dart';
 import 'package:cooking_converter/screens/favorites.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:mobx/mobx.dart';
 
 class ProductForm extends StatefulWidget {
   @override
@@ -21,6 +22,13 @@ class _ProductFormState extends State<ProductForm> {
   final quantityController = Controller();
 
   @override
+  void initState() {
+    // TODO: implement initState
+    // productController.fillProductList();
+    productController.fetchProducts();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
@@ -31,7 +39,9 @@ class _ProductFormState extends State<ProductForm> {
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.refresh),
-            onPressed: () {},
+            onPressed: () {
+              // productController.fetchProducts();
+            },
           )
         ],
       ),
@@ -70,6 +80,17 @@ class _ProductFormState extends State<ProductForm> {
               children: <Widget>[
                 SizedBox(height: 20),
                 Observer(builder: (_) {
+                  if (productController.asyncJsonProductList == null) {
+                    return Text("Nulo");
+                  }
+                  if (productController.asyncJsonProductList.status ==
+                      FutureStatus.pending) {
+                    return CircularProgressIndicator();
+                  }
+
+                  if (productController.asyncJsonProductList.error != null) {
+                    return Text("Erro");
+                  }
                   return Container(
                       padding: EdgeInsets.only(left: 8.0, right: 8.0),
                       decoration: BoxDecoration(
@@ -118,27 +139,26 @@ class _ProductFormState extends State<ProductForm> {
                 }),
                 SizedBox(height: 20),
                 SizedBox(
-                  child: Container(
-                      padding: EdgeInsets.only(left: 8.0, right: 8.0),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        border: Border.all(color: Colors.black),
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
-                      child: _textField(
-                        label: "Quantity",
-                        onChanged: (value) {
-                          quantityController.setSelectedItem(value.toString());
-                        },
-                      ),
-                  )
-                ),
+                    child: Container(
+                  padding: EdgeInsets.only(left: 8.0, right: 8.0),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    border: Border.all(color: Colors.black),
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  child: _textField(
+                    label: "Quantity",
+                    onChanged: (value) {
+                      quantityController.setSelectedItem(value.toString());
+                    },
+                  ),
+                )),
                 SizedBox(height: 60),
                 Observer(builder: (_) {
                   if (productController.selectedItem != "") {
                     return Container(
                         child: Text(
-                          '${quantityController.transaction}' +
+                      '${quantityController.transaction}' +
                           ' ${convertFromController.transaction} de' +
                           ' ${productController.transaction} equivale [result]' +
                           ' ${convertToController.transaction}',
@@ -179,12 +199,12 @@ class _ProductFormState extends State<ProductForm> {
       ),
       value: item,
       onChanged: (newItem) {
-        controller.setSelectedItem(newItem.toString());
+        controller.setSelectedItem(newItem.name);
       },
       items: list
           .map<DropdownMenuItem<Object>>((valueItem) =>
               new DropdownMenuItem<Object>(
-                  value: valueItem, child: Text(valueItem.toString())))
+                  value: valueItem, child: Text(valueItem.name)))
           .toList(),
     );
   }

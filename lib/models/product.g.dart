@@ -42,13 +42,13 @@ mixin _$Product on _ProductBase, Store {
   final _$idAtom = Atom(name: '_ProductBase.id');
 
   @override
-  int get id {
+  String get id {
     _$idAtom.reportRead();
     return super.id;
   }
 
   @override
-  set id(int value) {
+  set id(String value) {
     _$idAtom.reportWrite(value, super.id, () {
       super.id = value;
     });
