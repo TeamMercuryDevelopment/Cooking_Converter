@@ -1,0 +1,35 @@
+[
+    {
+      "name": "gramas",
+      "key": "g"
+    },
+    {
+      "name": "kilogramas",
+      "key": "kg"
+    },
+    {
+      "name": "xícaras",
+      "key": "cups"
+    },
+    {
+      "name": "colher de chás",
+      "key": "tsps"
+    },
+    {
+      "name": "colher de sopas",
+      "key": "tbsps"
+    },
+    {
+      "name": "mililitros",
+      "key": "ml"
+    },
+    {
+      "name": "litros",
+      "key": "liters"
+    },
+    {
+      "name": "libras",
+      "key": "lbs"
+    }
+  ]
+  
