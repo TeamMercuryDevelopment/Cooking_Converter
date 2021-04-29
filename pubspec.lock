@@ -419,7 +419,7 @@ packages:
     source: hosted
     version: "0.1.8"
   reflectable:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: reflectable
       url: "https://pub.dartlang.org"
