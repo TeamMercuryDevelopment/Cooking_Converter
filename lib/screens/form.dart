@@ -1,4 +1,6 @@
-import 'package:cooking_converter/controller/controller.dart';
+import 'package:cooking_converter/controller/convert_to_controller.dart';
+import 'package:cooking_converter/controller/product_controller.dart';
+import 'package:cooking_converter/controller/conversion_controller.dart';
 import 'package:cooking_converter/screens/favorites.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -16,16 +18,16 @@ class _ProductFormState extends State<ProductForm> {
   String convertFromValue;
   String convertToValue;
   String quantityValue;
-  final productController = Controller();
-  final convertFromController = Controller();
-  final convertToController = Controller();
-  final quantityController = Controller();
+  final productController = ProductController();
+  final convertToController = ConvertToController();
+  final convertFromController = ConvertToController();
+  final quantityController = ConversionController();
 
   @override
   void initState() {
-    // TODO: implement initState
-    // productController.fillProductList();
     productController.fetchProducts();
+    convertToController.fetchMeasures();
+    convertFromController.fetchMeasures();
   }
 
   @override
@@ -39,9 +41,7 @@ class _ProductFormState extends State<ProductForm> {
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.refresh),
-            onPressed: () {
-              // productController.fetchProducts();
-            },
+            onPressed: () {},
           )
         ],
       ),
@@ -107,6 +107,18 @@ class _ProductFormState extends State<ProductForm> {
                 }),
                 SizedBox(height: 20),
                 Observer(builder: (_) {
+                  if (convertFromController.asyncJsonMeasureList == null) {
+                    return Text("Nulo");
+                  }
+                  if (convertFromController.asyncJsonMeasureList.status ==
+                      FutureStatus.pending) {
+                    return CircularProgressIndicator();
+                  }
+
+                  if (convertFromController.asyncJsonMeasureList.error !=
+                      null) {
+                    return Text("Erro");
+                  }
                   return Container(
                       padding: EdgeInsets.only(left: 8.0, right: 8.0),
                       decoration: BoxDecoration(
@@ -118,11 +130,21 @@ class _ProductFormState extends State<ProductForm> {
                         label: convertFromController.selectedItem,
                         item: convertFromValue,
                         controller: convertFromController,
-                        list: convertFromController.listConvert,
+                        list: convertFromController.listMeasure,
                       ));
                 }),
                 SizedBox(height: 20),
                 Observer(builder: (_) {
+                  if (convertToController.asyncJsonMeasureList == null) {
+                    return Text("Nulo");
+                  }
+                  if (convertToController.asyncJsonMeasureList.status ==
+                      FutureStatus.pending) {
+                    return CircularProgressIndicator();
+                  }
+                  if (convertToController.asyncJsonMeasureList.error != null) {
+                    return Text("Erro");
+                  }
                   return Container(
                       padding: EdgeInsets.only(left: 8.0, right: 8.0),
                       decoration: BoxDecoration(
@@ -134,7 +156,7 @@ class _ProductFormState extends State<ProductForm> {
                         label: convertToController.selectedItem,
                         item: convertToValue,
                         controller: convertToController,
-                        list: convertToController.listConvert,
+                        list: convertToController.listMeasure,
                       ));
                 }),
                 SizedBox(height: 20),
