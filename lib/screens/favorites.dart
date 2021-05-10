@@ -1,5 +1,4 @@
-
-import 'package:cooking_converter/screens/form.dart';
+import 'package:cooking_converter/screens/form_page.dart';
 import 'package:flutter/material.dart';
 
 class Favorites extends StatefulWidget {
@@ -8,11 +7,16 @@ class Favorites extends StatefulWidget {
 }
 
 class _FavoritesState extends State<Favorites> {
-
   int _currentIndex = 1;
 
   List listItem = [
-    "Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 6", "Item 7",  
+    "Item 1",
+    "Item 2",
+    "Item 3",
+    "Item 4",
+    "Item 5",
+    "Item 6",
+    "Item 7",
   ];
 
   @override
@@ -20,10 +24,9 @@ class _FavoritesState extends State<Favorites> {
     return Scaffold(
       backgroundColor: Colors.blue[100],
       appBar: AppBar(
-        backgroundColor: Colors.blue[900],
-        centerTitle: true,
-        title: Text('Favoritos')
-      ),
+          backgroundColor: Colors.blue[900],
+          centerTitle: true,
+          title: Text('Favoritos')),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         type: BottomNavigationBarType.fixed,
@@ -43,9 +46,10 @@ class _FavoritesState extends State<Favorites> {
         ],
         onTap: (index) {
           setState(() {
-            _currentIndex = index;  
+            _currentIndex = index;
             if (_currentIndex == 0) {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => ProductForm()));     
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => ProductForm()));
             }
           });
         },
@@ -61,7 +65,10 @@ class _FavoritesState extends State<Favorites> {
                 onTap: () {
                   print(listItem[index]);
                 },
-                leading: Icon(Icons.article_rounded, size: 32.0,),
+                leading: Icon(
+                  Icons.article_rounded,
+                  size: 32.0,
+                ),
                 title: Text(listItem[index]),
               ),
             ),

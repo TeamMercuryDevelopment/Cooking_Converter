@@ -1,34 +1,34 @@
 [
     {
-      "name": "gramas",
+      "name": "Gramas",
       "key": "g"
     },
     {
-      "name": "kilogramas",
+      "name": "Kilogramas",
       "key": "kg"
     },
     {
-      "name": "xícaras",
+      "name": "Xícara(s)",
       "key": "cups"
     },
     {
-      "name": "colher de chás",
+      "name": "Colher(es) de chá",
       "key": "tsps"
     },
     {
-      "name": "colher de sopas",
+      "name": "Colher(es) de sopas",
       "key": "tbsps"
     },
     {
-      "name": "mililitros",
+      "name": "Mililitros",
       "key": "ml"
     },
     {
-      "name": "litros",
+      "name": "Litros",
       "key": "liters"
     },
     {
-      "name": "libras",
+      "name": "Libras",
       "key": "lbs"
     }
   ]
