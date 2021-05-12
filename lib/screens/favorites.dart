@@ -1,5 +1,7 @@
+import 'package:cooking_converter/core/app_colors.dart';
 import 'package:cooking_converter/screens/form_page.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class Favorites extends StatefulWidget {
   @override
@@ -9,24 +11,77 @@ class Favorites extends StatefulWidget {
 class _FavoritesState extends State<Favorites> {
   int _currentIndex = 1;
 
-  List listItem = [
-    "Item 1",
-    "Item 2",
-    "Item 3",
-    "Item 4",
-    "Item 5",
-    "Item 6",
-    "Item 7",
-  ];
+  List listItem;
+
+  @override
+  void initState() {
+    super.initState();
+    listItem = List();
+    addStrings();
+  }
+
+  addStrings() {
+    listItem.add("* gramas de arroz, equivale a * de kilogramas");
+    listItem.add("* xicarás de sal, equivale a * de kilogramas");
+    listItem.add("* gramas de pimenta, equivale a * de kilogramas");
+    listItem.add("* kilogramas de cocaína, equivale a * de colher(es) de sopa");
+  }
+
+  removeString(index) {
+    setState(() {
+      listItem.removeAt(index);
+    });
+  }
+
+  showSnackBar(context, item) {
+    ScaffoldMessenger.of(context)
+        .showSnackBar(SnackBar(content: Text("String deleted")));
+  }
+
+  Widget list() {
+    return SafeArea(
+      child: ListView.builder(
+        padding: EdgeInsets.all(20),
+        itemCount: listItem.length,
+        itemBuilder: (context, index) {
+          return row(context, index);
+        },
+      ),
+    );
+  }
+
+  Widget row(content, index) {
+    return Dismissible(
+      key: Key(listItem[index]),
+      onDismissed: (direction) {
+        var item = listItem[index];
+        showSnackBar(context, item);
+        removeString(index);
+      },
+      child: Card(
+        clipBehavior: Clip.antiAlias,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+        color: AppColors.lightGray,
+        borderOnForeground: true,
+        child: ListTile(
+          minVerticalPadding: 30,
+          onTap: () {
+            print(listItem[index]);
+          },
+          title: Text(
+            listItem[index],
+            style:
+                GoogleFonts.openSans(fontSize: 17, fontWeight: FontWeight.w600),
+          ),
+        ),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blue[100],
-      appBar: AppBar(
-          backgroundColor: Colors.blue[900],
-          centerTitle: true,
-          title: Text('Favoritos')),
+      backgroundColor: AppColors.offWhite,
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         type: BottomNavigationBarType.fixed,
@@ -36,12 +91,8 @@ class _FavoritesState extends State<Favorites> {
             label: "Converter",
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.favorite_border),
+            icon: Icon(Icons.list),
             label: "Favorites",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.rate_review_rounded),
-            label: "Rate",
           ),
         ],
         onTap: (index) {
@@ -54,27 +105,7 @@ class _FavoritesState extends State<Favorites> {
           });
         },
       ),
-      body: ListView.builder(
-        itemCount: listItem.length,
-        itemBuilder: (context, index) {
-          return Padding(
-            padding: const EdgeInsets.fromLTRB(24.0, 12.0, 24.0, 0.0),
-            child: Card(
-              borderOnForeground: true,
-              child: ListTile(
-                onTap: () {
-                  print(listItem[index]);
-                },
-                leading: Icon(
-                  Icons.article_rounded,
-                  size: 32.0,
-                ),
-                title: Text(listItem[index]),
-              ),
-            ),
-          );
-        },
-      ),
+      body: list(),
     );
   }
 }

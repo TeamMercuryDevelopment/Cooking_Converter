@@ -62,194 +62,216 @@ class _ProductFormState extends State<ProductForm> {
         onPressed: () {},
         child: Icon(Icons.favorite),
       ),
-      body: SingleChildScrollView(
-        child: Center(
-          child: Column(
-            children: <Widget>[
-              Container(
-                width: MediaQuery.of(context).size.width * 1,
-                height: MediaQuery.of(context).size.height * 0.55,
-                decoration: BoxDecoration(
-                  gradient: RadialGradient(
-                    colors: [AppColors.primaryBlue, AppColors.secondaryBlue],
-                  ),
-                ),
-                child: Column(
-                  children: <Widget>[
-                    Container(
-                      margin: const EdgeInsets.fromLTRB(16.0, 80.0, 16.0, 16.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          SizedBox(
-                              child: Container(
-                            width: MediaQuery.of(context).size.width * 0.2,
-                            padding: EdgeInsets.only(left: 8.0, right: 8.0),
-                            child: _textField(
-                              label: "Qtd",
-                              onChanged: (value) {
-                                conversionController
-                                    .setSelectedItem(value.toString());
-                              },
-                            ),
-                          )),
-                          Observer(builder: (_) {
-                            if (convertFromController.asyncJsonMeasureList ==
-                                null) {
-                              return Text("Nulo");
-                            }
-                            if (convertFromController
-                                    .asyncJsonMeasureList.status ==
-                                FutureStatus.pending) {
-                              return CircularProgressIndicator();
-                            }
-
-                            if (convertFromController
-                                    .asyncJsonMeasureList.error !=
-                                null) {
-                              return Text("Erro");
-                            }
-                            return Container(
-                                padding: EdgeInsets.only(left: 8.0, right: 8.0),
-                                width: MediaQuery.of(context).size.width * 0.5,
-                                decoration: BoxDecoration(
-                                  color: Colors.cyan[50],
-                                  borderRadius: BorderRadius.circular(10.0),
-                                ),
-                                child: _selectBox(
-                                  label:
-                                      convertFromController.selectedItem.name,
-                                  item: convertFromValue,
-                                  controller: convertFromController,
-                                  list: convertFromController.listMeasure,
-                                ));
-                          }),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Container(
+            height: MediaQuery.of(context).size.height * 1,
+            child: Stack(
+              children: <Widget>[
+                Positioned(
+                  child: Container(
+                    height: MediaQuery.of(context).size.height * 0.5,
+                    decoration: BoxDecoration(
+                      gradient: RadialGradient(
+                        colors: [
+                          AppColors.primaryBlue,
+                          AppColors.secondaryBlue
                         ],
                       ),
                     ),
-                    Observer(builder: (_) {
-                      if (productController.asyncJsonProductList == null) {
-                        return Text("Nulo");
-                      }
-                      if (productController.asyncJsonProductList.status ==
-                          FutureStatus.pending) {
-                        return CircularProgressIndicator();
-                      }
-
-                      if (productController.asyncJsonProductList.error !=
-                          null) {
-                        return Text("Erro");
-                      }
-                      return Container(
-                          margin:
-                              const EdgeInsets.fromLTRB(16.0, 32.0, 16.0, 16.0),
-                          padding: EdgeInsets.only(left: 8.0, right: 8.0),
-                          width: MediaQuery.of(context).size.width * 0.5,
-                          decoration: BoxDecoration(
-                            color: Colors.cyan[50],
-                            borderRadius: BorderRadius.circular(10.0),
-                          ),
-                          child: _selectBox(
-                            label: productController.selectedItem.name,
-                            item: productValue,
-                            controller: productController,
-                            list: productController.listProduct,
-                          ));
-                    }),
-                    Observer(builder: (_) {
-                      if (convertToController.asyncJsonMeasureList == null) {
-                        return Text("Nulo");
-                      }
-                      if (convertToController.asyncJsonMeasureList.status ==
-                          FutureStatus.pending) {
-                        return CircularProgressIndicator();
-                      }
-                      if (convertToController.asyncJsonMeasureList.error !=
-                          null) {
-                        return Text("Erro");
-                      }
-                      return Container(
-                          margin:
-                              const EdgeInsets.fromLTRB(16.0, 32.0, 16.0, 16.0),
-                          padding: EdgeInsets.only(left: 8.0, right: 8.0),
-                          width: MediaQuery.of(context).size.width * 0.5,
-                          decoration: BoxDecoration(
-                            color: Colors.cyan[50],
-                            borderRadius: BorderRadius.circular(10.0),
-                          ),
-                          child: _selectBox(
-                            label: convertToController.selectedItem.name,
-                            item: convertToValue,
-                            controller: convertToController,
-                            list: convertToController.listMeasure,
-                          ));
-                    }),
-                  ],
+                  ),
                 ),
-              ),
-              Container(
-                  width: MediaQuery.of(context).size.width * 1,
-                  decoration: BoxDecoration(
-                    gradient: RadialGradient(
-                      colors: [AppColors.primaryBlue, AppColors.secondaryBlue],
+                Positioned(
+                  bottom: 0,
+                  child: Container(
+                    height: MediaQuery.of(context).size.height * 0.4,
+                    decoration: BoxDecoration(
+                      color: AppColors.offWhite,
                     ),
                   ),
-                  child: Column(
-                    children: <Widget>[
-                      ElevatedButton(
-                        style: ButtonStyle(
-                          minimumSize: MaterialStateProperty.all(
-                            Size(218.0, 88.0),
-                          ),
-                          backgroundColor:
-                              MaterialStateProperty.all<Color>(AppColors.blue),
-                          shape:
-                              MaterialStateProperty.all<RoundedRectangleBorder>(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(200.0),
-                            ),
+                ),
+                Positioned(
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 50),
+                    child: Column(
+                      children: <Widget>[
+                        Container(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              SizedBox(
+                                  child: Container(
+                                width: MediaQuery.of(context).size.width * 0.2,
+                                padding: EdgeInsets.only(left: 8.0, right: 8.0),
+                                child: _textField(
+                                  label: "Qtd",
+                                  onChanged: (value) {
+                                    conversionController
+                                        .setSelectedItem(value.toString());
+                                  },
+                                ),
+                              )),
+                              Observer(builder: (_) {
+                                if (convertFromController
+                                        .asyncJsonMeasureList ==
+                                    null) {
+                                  return Text("Nulo");
+                                }
+                                if (convertFromController
+                                        .asyncJsonMeasureList.status ==
+                                    FutureStatus.pending) {
+                                  return CircularProgressIndicator();
+                                }
+
+                                if (convertFromController
+                                        .asyncJsonMeasureList.error !=
+                                    null) {
+                                  return Text("Erro");
+                                }
+                                return Container(
+                                    padding:
+                                        EdgeInsets.only(left: 8.0, right: 8.0),
+                                    width:
+                                        MediaQuery.of(context).size.width * 0.5,
+                                    decoration: BoxDecoration(
+                                      color: AppColors.offWhite,
+                                      borderRadius: BorderRadius.circular(10.0),
+                                    ),
+                                    child: _selectBox(
+                                      label: convertFromController
+                                          .selectedItem.name,
+                                      item: convertFromValue,
+                                      controller: convertFromController,
+                                      list: convertFromController.listMeasure,
+                                    ));
+                              }),
+                            ],
                           ),
                         ),
-                        onPressed: () {
-                          conversionController.convertIngredient(
-                              productController.selectedItem,
-                              conversionController.quantity.toString(),
-                              convertFromController.selectedItem,
-                              convertToController.selectedItem);
-                        },
-                        child: Text("Calcular",
-                            style:
-                                TextStyle(color: Colors.white, fontSize: 25)),
-                      ),
-                    ],
-                  )),
-              Container(
-                  margin: const EdgeInsets.fromLTRB(24.0, 24.0, 24.0, 24.0),
-                  child: Column(
-                    children: <Widget>[
-                      Observer(builder: (_) {
-                        if (conversionController.responseText != null) {
+                        Observer(builder: (_) {
+                          if (productController.asyncJsonProductList == null) {
+                            return Text("Nulo");
+                          }
+                          if (productController.asyncJsonProductList.status ==
+                              FutureStatus.pending) {
+                            return CircularProgressIndicator();
+                          }
+
+                          if (productController.asyncJsonProductList.error !=
+                              null) {
+                            return Text("Erro");
+                          }
                           return Container(
-                              child: Text(
-                            conversionController.responseText,
-                            style: TextStyle(
-                              fontSize: 18.0,
-                            ),
-                            textAlign: TextAlign.center,
-                          ));
-                        } else {
-                          return Text(
-                            'Resultado estará aqui.',
-                            style: TextStyle(
-                              fontSize: 24.0,
-                            ),
-                            textAlign: TextAlign.center,
-                          );
-                        }
-                      }),
-                    ],
-                  )),
-            ],
+                              margin: const EdgeInsets.fromLTRB(
+                                  16.0, 32.0, 16.0, 16.0),
+                              padding: EdgeInsets.only(left: 8.0, right: 8.0),
+                              width: MediaQuery.of(context).size.width * 0.5,
+                              decoration: BoxDecoration(
+                                color: AppColors.offWhite,
+                                borderRadius: BorderRadius.circular(10.0),
+                              ),
+                              child: _selectBox(
+                                label: productController.selectedItem.name,
+                                item: productValue,
+                                controller: productController,
+                                list: productController.listProduct,
+                              ));
+                        }),
+                        Observer(builder: (_) {
+                          if (convertToController.asyncJsonMeasureList ==
+                              null) {
+                            return Text("Nulo");
+                          }
+                          if (convertToController.asyncJsonMeasureList.status ==
+                              FutureStatus.pending) {
+                            return CircularProgressIndicator();
+                          }
+                          if (convertToController.asyncJsonMeasureList.error !=
+                              null) {
+                            return Text("Erro");
+                          }
+                          return Container(
+                              margin: const EdgeInsets.fromLTRB(
+                                  16.0, 32.0, 16.0, 16.0),
+                              padding: EdgeInsets.only(left: 8.0, right: 8.0),
+                              width: MediaQuery.of(context).size.width * 0.5,
+                              decoration: BoxDecoration(
+                                color: AppColors.offWhite,
+                                borderRadius: BorderRadius.circular(10.0),
+                              ),
+                              child: _selectBox(
+                                label: convertToController.selectedItem.name,
+                                item: convertToValue,
+                                controller: convertToController,
+                                list: convertToController.listMeasure,
+                              ));
+                        }),
+                      ],
+                    ),
+                  ),
+                ),
+                Center(
+                  child: Positioned(
+                    child: ElevatedButton(
+                      style: ButtonStyle(
+                        minimumSize: MaterialStateProperty.all(
+                          Size(218.0, 88.0),
+                        ),
+                        backgroundColor:
+                            MaterialStateProperty.all<Color>(AppColors.blue),
+                        shape:
+                            MaterialStateProperty.all<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(200.0),
+                          ),
+                        ),
+                      ),
+                      onPressed: () {
+                        conversionController.convertIngredient(
+                            productController.selectedItem,
+                            conversionController.quantity.toString(),
+                            convertFromController.selectedItem,
+                            convertToController.selectedItem);
+                      },
+                      child: Text("Converter",
+                          style: TextStyle(color: Colors.white, fontSize: 25)),
+                    ),
+                  ),
+                ),
+                Positioned(
+                  width: MediaQuery.of(context).size.width * 1,
+                  top: MediaQuery.of(context).size.height * 0.65,
+                  child: Container(
+                      margin: const EdgeInsets.fromLTRB(24.0, 24.0, 24.0, 24.0),
+                      child: Column(
+                        children: <Widget>[
+                          Observer(builder: (_) {
+                            if (conversionController.responseText != null) {
+                              return Container(
+                                  child: Text(
+                                conversionController.responseText,
+                                style: TextStyle(
+                                  fontSize: 18.0,
+                                ),
+                                textAlign: TextAlign.center,
+                              ));
+                            } else {
+                              return Container(
+                                child: Text(
+                                  'Resultado estará aqui.',
+                                  style: TextStyle(
+                                    fontSize: 24.0,
+                                  ),
+                                  textAlign: TextAlign.center,
+                                ),
+                              );
+                            }
+                          }),
+                        ],
+                      )),
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -286,14 +308,14 @@ class _ProductFormState extends State<ProductForm> {
         onChanged: onChanged,
         decoration: InputDecoration(
           hintText: label,
-          fillColor: Colors.lightBlue[50],
+          fillColor: AppColors.offWhite,
           filled: true,
           enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10.0),
-              borderSide: BorderSide(color: Colors.cyan[50], width: 3.0)),
+              borderSide: BorderSide(color: AppColors.offWhite, width: 3.0)),
           disabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10.0),
-              borderSide: BorderSide(color: Colors.cyan[50], width: 3.0)),
+              borderSide: BorderSide(color: AppColors.offWhite, width: 3.0)),
         ),
         keyboardType: TextInputType.numberWithOptions(decimal: true),
       ),
